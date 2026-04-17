@@ -1,21 +1,23 @@
 import argparse
-import sys
 
 
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(prog="hello_heartbeat")
-    return parser.parse_args(argv)
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="A simple greeting CLI.")
+    parser.add_argument("--name", type=str, default=None, help="Name to greet.")
+    parser.add_argument("--loud", action="store_true", help="Uppercase the greeting.")
+    return parser.parse_args()
 
 
-def format_greeting(name: str, loud: bool) -> str:
-    return ""
+def format_greeting(name: str | None, loud: bool) -> str:
+    greeting = f"Hello, {name}!" if name else "Hello, world!"
+    return greeting.upper() if loud else greeting
 
 
 def main() -> int:
-    parse_args()
-    print("Hello, world!")
+    args = parse_args()
+    print(format_greeting(args.name, args.loud))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
