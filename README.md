@@ -14,6 +14,7 @@ python -m hello_heartbeat --name=Valaris --loud
 ## How to test
 
 ```
+pip install -r requirements-dev.txt
 pytest -q
 ```
 
